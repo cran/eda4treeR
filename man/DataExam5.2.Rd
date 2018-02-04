@@ -18,7 +18,7 @@ data(DataExam5.2)
 Exam5.2 presents the height of 37 seedlots from 6 sites.
 }
 \examples{
-data(Exam5.2)
+data(DataExam5.2)
 }
 \references{
 \enumerate{

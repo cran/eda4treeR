@@ -28,5 +28,5 @@
 #'    \code{\link{Exam5.2}}
 #'
 #' @examples
-#' data(Exam5.2)
+#' data(DataExam5.2)
 NULL
