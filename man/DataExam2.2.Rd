@@ -4,11 +4,13 @@
 \name{DataExam2.2}
 \alias{DataExam2.2}
 \title{Data for Example 2.2 from Experimental Design & Analysis for Tree Improvement}
-\format{A \code{data.frame} with 16 rows and 2 variables.
+\format{
+A \code{data.frame} with 16 rows and 2 variables.
 \describe{
        \item{\code{Seedlot}}{Two Seedlots Seed Orchad (SO) and routin plantation (P)}
        \item{\code{dbh}}{Diameter at breast height}
-       }}
+       }
+}
 \usage{
 data(DataExam2.2)
 }

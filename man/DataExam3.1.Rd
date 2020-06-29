@@ -4,7 +4,8 @@
 \name{DataExam3.1}
 \alias{DataExam3.1}
 \title{Data for Example 3.1 from Experimental Design & Analysis for Tree Improvement}
-\format{A \code{data.frame} with 80 rows and 6 variables.
+\format{
+A \code{data.frame} with 80 rows and 6 variables.
 \describe{
        \item{\code{Repl}}{Replication number of different Seedlots}
        \item{\code{PlotNo}}{Plot No of differnt Trees}
@@ -12,7 +13,8 @@
        \item{\code{TreeNo}}{Tree number of Seedlots}
        \item{\code{Ht}}{Height in meter}
        \item{\code{Dgl}}{Diameter at ground level}
-       }}
+       }
+}
 \usage{
 data(DataExam3.1)
 }

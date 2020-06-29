@@ -4,13 +4,15 @@
 \name{DataExam5.1}
 \alias{DataExam5.1}
 \title{Data for Example 5.1 from Experimental Design & Analysis for Tree Improvement}
-\format{A \code{data.frame} with 108 rows and 4 variables.
+\format{
+A \code{data.frame} with 108 rows and 4 variables.
 \describe{
        \item{\code{Site}}{Sites for the experiment}
        \item{\code{SeedLot}}{Seed lot number}
        \item{\code{Ht}}{Height of the plants}
        \item{\code{SiteMean}}{Mean Height of Each Site}
-         }}
+         }
+}
 \usage{
 data(DataExam5.1)
 }

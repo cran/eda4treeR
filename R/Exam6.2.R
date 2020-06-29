@@ -1,6 +1,7 @@
-#' @title    Data for Example 6.2 from Experimental Design & Analysis for Tree Improvement
-#' @name     DataExam6.2
-#' @description Exam 6.2 Dbh mean, Dbh varince and number of trees per plot from 3 provinces("PNG","Sabah","Queensland") with 4 replicationsof 48 families.
+#' @title    Example 6.2 from Experimental Design & Analysis for Tree Improvement
+#' @name     Exam6.2
+#' @description Exam 6.2 Dbh mean, Dbh varince and number of trees per plot from 3 provinces("PNG","Sabah","Queensland") with 4 replications of 48 families.
+#'
 #' @author
 #' \enumerate{
 #'          \item  Muhammad Yaseen (\email{myaseen208@@gmail.com})
@@ -25,8 +26,7 @@
 #' library(tidyverse)
 #' library(lme4)
 #'
-#'print("Dbh Heritability for PNG")
-#' DataExam6.2.1<- DataExam6.2[DataExam6.2$Province=="PNG",]
+#' DataExam6.2.1 <- DataExam6.2[DataExam6.2$Province=="PNG",]
 #'fm6.3 <- lm(formula      =
 #'         Dbh.mean        ~ Replication+Family
 #'         ,data           = DataExam6.2.1

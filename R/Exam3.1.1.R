@@ -1,6 +1,6 @@
 #' @title    Example 3.1.1 from Experimental Design & Analysis for Tree Improvement
 #' @name     Exam3.1.1
-#' @description Exam3.1.1 is part of data from Australian Centre for Agricultural Research (ACIAR) 
+#' @description Exam3.1.1 is part of data from Australian Centre for Agricultural Research (ACIAR)
 #'              in Queensland, Australia (Experiment 309).
 #' @author
 #' \enumerate{
@@ -42,6 +42,7 @@
 #'   )
 #' anova(fm3.8)
 #' DataExam3.1.1 %>%
+#' dplyr::ungroup() %>%
 #'  dplyr::group_by(SeedLot) %>%
 #'  dplyr::summarize(Mean=mean(Mean))
 NULL

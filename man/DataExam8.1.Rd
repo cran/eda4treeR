@@ -4,7 +4,8 @@
 \name{DataExam8.1}
 \alias{DataExam8.1}
 \title{Data for Example 8.1 from Experimental Design & Analysis for Tree Improvement}
-\format{A \code{data.frame} with 236 rows and 8 variables.
+\format{
+A \code{data.frame} with 236 rows and 8 variables.
 \describe{
        \item{\code{Replication}}{There are 4 replication for the design}
        \item{\code{Row}}{Experiment is conducted under 6 rows}\
@@ -14,7 +15,8 @@
        \item{\code{Country}}{Data for different seedlots was collected from 18 countries}
        \item{\code{Dbh}}{Diameter at breast height}
        \item{\code{Country.1}}{Recoded Country lables}
-       }}
+       }
+}
 \usage{
 data(DataExam8.1)
 }

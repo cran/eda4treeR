@@ -4,7 +4,8 @@
 \name{DataExam4.3.1}
 \alias{DataExam4.3.1}
 \title{Data for Example 4.3.1 from Experimental Design & Analysis for Tree Improvement}
-\format{A \code{data.frame} with 72 rows and 8 variables.
+\format{
+A \code{data.frame} with 72 rows and 8 variables.
 \describe{
        \item{\code{Row}}{Row number of different Seedlots}
        \item{\code{Column}}{Column number of differnt Trees}
@@ -14,7 +15,8 @@
        \item{\code{SeedLot}}{Seed lot number}
        \item{\code{GerminationCount}}{Number of germinated seeds out of 25}
        \item{\code{Percent}}{Germination Percentage}
-       }}
+       }
+}
 \usage{
 data(DataExam4.3.1)
 }
