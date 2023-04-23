@@ -1,4 +1,4 @@
-#' @title    Example 5.2 from Experimental Design & Analysis for Tree Improvement
+#' @title    Example 5.2 from Experimental Design and Analysis for Tree Improvement
 #' @name     Exam5.2
 #' @description Exam5.2 presents the height of 37 seedlots from 6 sites.
 #'
@@ -10,55 +10,49 @@
 #'
 #' @references
 #' \enumerate{
-#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-#'                CSIRO Publishing.
+#'          \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+#'                CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
 #'              }
 #'
 #' @seealso
 #'    \code{\link{DataExam5.2}}
 #'
-#' @import tidyverse
+#' @importFrom car Anova
+#' @import dae
+#' @import dplyr
+#' @importFrom emmeans emmeans emmip
 #' @import ggplot2
+#' @importFrom lmerTest lmer
 #' @importFrom magrittr %>%
-#' @importFrom stats lm anova
+#' @import predictmeans
+#' @importFrom stats lm anova model.tables
+#' @importFrom supernova supernova
 #'
 #' @examples
-#' data(DataExam5.2)
-#' library(tidyverse)
+#' library(car)
+#' library(dae)
+#' library(dplyr)
+#' library(emmeans)
 #' library(ggplot2)
+#' library(lmerTest)
+#' library(magrittr)
+#' library(predictmeans)
+#' library(supernova)
 #'
-#' fm5.7 <- aov(formula = height~env*gen
-#'    ,data    = DataExam5.2
-#'    #, subset
-#'    #, weights
-#'    #, na.action
-#'    , method = "qr"
-#'    , model = TRUE
-#'    , x = FALSE
-#'    , y = FALSE
-#'    , qr = TRUE
-#'    , singular.ok = TRUE
-#'    , contrasts = NULL
-#'    )
+#' data(DataExam5.2)
 #'
-#'    anova(fm5.7)
+#' # Pg.75
+#' fm5.7 <- aov(formula = height~env*gen, data = DataExam5.2)
+#'
+#' # Pg. 77
+#' anova(fm5.7)
 #'
 #'
-#'      fm5.9  <-    aov(formula = height~env*gen
-#'      ,data    = DataExam5.2
-#'      #, subset
-#'      #, weights
-#'      #, na.action
-#'      , method = "qr"
-#'      , model = TRUE
-#'      , x = FALSE
-#'      , y = FALSE
-#'      , qr = TRUE
-#'      , singular.ok = TRUE
-#'      , contrasts = NULL
-#'      )
-#'      anova(fm5.9)
-#'      b<-anova(fm5.9)
+#' fm5.9 <- aov(formula = height~env*gen, data = DataExam5.2)
+#' # Pg. 77
+#' anova(fm5.9)
+#'
+#'      b <- anova(fm5.9)
 #'      Res                     <- length(b[["Sum Sq"]])
 #'      df                      <- 384
 #'      MSS                     <- 964
@@ -67,7 +61,10 @@
 #'      b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
 #'      b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
 #'      b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
-#'      b
+#'
+#'  # Pg. 77
+#'
+#'  print(b)
 #'
 #'      X1<- DataExam5.2 %>%
 #'      group_by(env) %>%

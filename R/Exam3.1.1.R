@@ -1,4 +1,4 @@
-#' @title    Example 3.1.1 from Experimental Design & Analysis for Tree Improvement
+#' @title    Example 3.1.1 from Experimental Design and Analysis for Tree Improvement
 #' @name     Exam3.1.1
 #' @description Exam3.1.1 is part of data from Australian Centre for Agricultural Research (ACIAR)
 #'              in Queensland, Australia (Experiment 309).
@@ -10,39 +10,46 @@
 #'
 #' @references
 #' \enumerate{
-#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-#'                CSIRO Publishing.
+#'          \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+#'                CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
 #'              }
 #'
 #' @seealso
 #'    \code{\link{DataExam3.1.1}}
 #'
-#' @import tidyverse
+#' @importFrom car Anova
+#' @import dae
+#' @import dplyr
+#' @importFrom emmeans emmeans emmip
+#' @import ggplot2
+#' @importFrom lmerTest lmer
 #' @importFrom magrittr %>%
-#' @importFrom stats lm anova
+#' @import predictmeans
+#' @importFrom stats lm anova model.tables
+#' @importFrom supernova supernova
 #'
 #' @examples
+#' library(car)
+#' library(dae)
+#' library(dplyr)
+#' library(emmeans)
+#' library(ggplot2)
+#' library(lmerTest)
+#' library(magrittr)
+#' library(predictmeans)
+#' library(supernova)
 #'
-#' library(tidyverse)
 #' data(DataExam3.1.1)
 #'
-#'fm3.8   <-     lm(
-#'    formula     = Mean~Repl+SeedLot
-#'  , data        = DataExam3.1.1
-#'  #, subset
-#'  #, weights
-#'  #, na.action
-#'  , method      = "qr"
-#'  , model       = TRUE
-#'  , x           = FALSE
-#'  , y           = FALSE
-#'  , qr          = TRUE
-#'  , singular.ok = TRUE
-#'  , contrasts   = NULL
-#'   )
+#' # Pg. 36
+#' fm3.8 <- lm(formula  = Mean ~ Repl + SeedLot, data = DataExam3.1.1)
+#'
+#' # Pg. 40
 #' anova(fm3.8)
-#' DataExam3.1.1 %>%
-#' dplyr::ungroup() %>%
-#'  dplyr::group_by(SeedLot) %>%
-#'  dplyr::summarize(Mean=mean(Mean))
+#'
+#' # Pg. 40
+#' emmeans(object = fm3.8, specs = ~ SeedLot)
+#' emmip(object = fm3.8, formula  = ~ SeedLot) +
+#'  theme_classic()
+#'
 NULL

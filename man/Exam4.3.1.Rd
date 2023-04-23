@@ -2,48 +2,43 @@
 % Please edit documentation in R/Exam4.3.1.R
 \name{Exam4.3.1}
 \alias{Exam4.3.1}
-\title{Example 4.3.1 from Experimental Design & Analysis for Tree Improvement}
+\title{Example 4.3.1 from Experimental Design and Analysis for Tree Improvement}
 \description{
 Exam4.3.1 presents the germination count data for 4 Pre-Treatments and 6 Seedlots.
 }
 \examples{
-data(DataExam4.3.1)
-library(tidyverse)
+library(car)
+library(dae)
+library(dplyr)
+library(emmeans)
 library(ggplot2)
-fm4.4    <- aov(
- formula     = Percent~Replication+Pretreatment*SeedLot
- , data      = DataExam4.3.1
-  #, subset
-  #, weights
-  #, na.action
- , method      = "qr"
- , model       = TRUE
- , x           = FALSE
- , y           = FALSE
- , qr          = TRUE
- , singular.ok = TRUE
- , contrasts   = NULL
- )
+library(lmerTest)
+library(magrittr)
+library(predictmeans)
+library(supernova)
+
+data(DataExam4.3)
+
+# Pg. 57
+fm4.4    <-
+  aov(
+      formula     = Percent ~ Repl + Treat*SeedLot
+    , data        = DataExam4.3 \%>\%
+                    filter(Treat != "control")
+     )
+
+ # Pg. 57
  anova(fm4.4)
+ model.tables(x = fm4.4, type = "means")
 
- DataExam4.3.1 \%>\%
-   dplyr::group_by(Pretreatment) \%>\%
-   dplyr::summarize(Mean=mean(Percent))
-
- DataExam4.3.1 \%>\%
-     dplyr::group_by(SeedLot) \%>\%
-     dplyr::summarize(Mean=mean(Percent))
-
- DataExam4.3.1 \%>\%
-     dplyr::group_by(Pretreatment,SeedLot) \%>\%
-     dplyr::summarize(Mean=mean(Percent))
-
-
+ emmeans(object = fm4.4, specs = ~ Treat)
+ emmeans(object = fm4.4, specs = ~ SeedLot)
+ emmeans(object = fm4.4, specs = ~ Treat * SeedLot)
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

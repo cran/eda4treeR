@@ -9,40 +9,38 @@ Exam8.1.2 presents the Analysis of Nested Seedlot Structure of Diameter at breas
              countries and 59 provinces of 18 selected countries given in Example 8.1.
 }
 \examples{
-data(DataExam8.1)
-library(tidyverse)
+library(car)
+library(dae)
+library(dplyr)
 library(emmeans)
-  fm8.11 <- aov(formula      =
-  Dbh~Country*Province
-  ,data         = DataExam8.1
-  #, subset
-  #, weights
-  #, na.action
-  , method      = "qr"
-  , model       = TRUE
-  , x           = FALSE
-  , y           = FALSE
-  , qr          = TRUE
-  , singular.ok = TRUE
-  , contrasts   = NULL
-  )
-  b<-anova(fm8.11)
-     Res                     <- length(b[["Sum Sq"]])
-     df                      <- 119
-     MSS                     <- 0.1951
-     b[["Df"]][Res]          <- df
-     b[["Sum Sq"]][Res]      <- MSS*df
-     b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
-     b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
-     b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
-     b
-  library(emmeans)
-  emmeans::emmeans(fm8.11,specs = "Country")
+library(ggplot2)
+library(lmerTest)
+library(magrittr)
+library(predictmeans)
+library(supernova)
+
+data(DataExam8.1)
+
+# Pg. 167
+fm8.11 <- aov(formula = dbh ~ country + country:prov, data = DataExam8.1)
+
+  b <- anova(fm8.11)
+  Res                     <- length(b[["Sum Sq"]])
+  df                      <- 119
+  MSS                     <- 0.1951
+  b[["Df"]][Res]          <- df
+  b[["Sum Sq"]][Res]      <- MSS*df
+  b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
+  b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
+  b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
+  b
+
+ emmeans(fm8.11, specs = "country")
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

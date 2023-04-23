@@ -2,70 +2,48 @@
 % Please edit documentation in R/Exam4.4.R
 \name{Exam4.4}
 \alias{Exam4.4}
-\title{Example 4.4 from Experimental Design & Analysis for Tree Improvement}
+\title{Example 4.4 from Experimental Design and Analysis for Tree Improvement}
 \description{
-Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two 
+Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two
              levels of Fertilizer and two levels of Irrigation.
 }
 \examples{
-data(DataExam4.4)
-library(tidyverse)
-library(ggplot2)
+library(car)
 library(dae)
+library(dplyr)
+library(emmeans)
+library(ggplot2)
+library(lmerTest)
+library(magrittr)
+library(predictmeans)
+library(supernova)
 
-fm4.6    <- aov(
-      formula     = Height~Rep+Irrig*Ferti*SeedDLot+Error(Rep/Irrig:Ferti)
+data(DataExam4.4)
+
+# Pg. 58
+fm4.6    <-
+  aov(
+      formula     = Height ~ Rep + Irrig*Ferti*SeedDLot +
+                             Error(Rep/Irrig:Ferti)
     , data        = DataExam4.4
-    #, subset
-    #, weights
-    #, na.action
-    , method      = "qr"
-    , model       = TRUE
-    , x           = FALSE
-    , y           = FALSE
-    , qr          = TRUE
-    , singular.ok = TRUE
-    , contrasts   = NULL
     )
+
+# Pg. 61
  summary(fm4.6)
 
-    DataExam4.4 \%>\%
-      dplyr::group_by(Irrig) \%>\%
-      dplyr::summarize(Mean=mean(Height))
+# Pg. 61
+model.tables(x = fm4.6, type = "means")
 
-    DataExam4.4 \%>\%
-      dplyr::group_by(Ferti) \%>\%
-      dplyr::summarize(Mean=mean(Height))
+# Pg. 61
+emmeans(object = fm4.6, specs = ~ Irrig)
+emmip(object = fm4.6, formula  = ~ Irrig) +
+    theme_classic()
 
-    DataExam4.4 \%>\%
-      dplyr::group_by(SeedDLot) \%>\%
-      dplyr::summarize(Mean=mean(Height))
-
-    DataExam4.4 \%>\%
-      dplyr::group_by(Irrig,Ferti) \%>\%
-      dplyr::summarize(Mean=mean(Height))
-
-    DataExam4.4 \%>\%
-      dplyr::group_by(Irrig,SeedDLot) \%>\%
-      dplyr::summarize(Mean=mean(Height))
-
-    DataExam4.4 \%>\%
-      dplyr::group_by(Ferti,SeedDLot) \%>\%
-      dplyr::summarize(Mean=mean(Height))
-
-    DataExam4.4 \%>\%
-      dplyr::group_by(Irrig,Ferti,SeedDLot) \%>\%
-      dplyr::summarize(Mean=mean(Height))
-RESFIT <- data.frame(residualvalue=residuals(fm4.6),fittedvalue=fitted.values(fm4.6))
-ggplot(RESFIT,aes(x=fittedvalue,y=residualvalue))+
- geom_point(size=2)+
- labs(x="Residual vs Fitted Values",y="")+
- theme_bw()
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

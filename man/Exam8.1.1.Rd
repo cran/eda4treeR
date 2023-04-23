@@ -2,48 +2,56 @@
 % Please edit documentation in R/Exam8.1.1.R
 \name{Exam8.1.1}
 \alias{Exam8.1.1}
-\title{Example 8.1.1 from Experimental Design & Analysis for Tree Improvement}
+\title{Example 8.1.1 from Experimental Design and Analysis for Tree Improvement}
 \description{
 Exam8.1.1 presents the Mixed Effects Analysis of Diameter at breast height (Dbh) of 60 SeedLots
              under layout of row column design with 6 rows and 10 columns in 18
              countries and 59 provinces of 18 selected countries given in Example 8.1.
 }
 \examples{
-data(DataExam8.1)
-library(tidyverse)
+library(car)
+library(dae)
+library(dplyr)
 library(emmeans)
-library(lme4)
-fm8.8<- lmer(formula=
-     Dbh~1+Replication+Column+Province+(1|Replication:Row)+(1|Replication:Column)
-    ,data = DataExam8.1
-    ,REML = TRUE
-    ,control = lmerControl()
-    ,start = NULL
-    , verbose = 0L
-   #, subset
-   #, weights
-   #, na.action
-   #,offset
-    , contrasts = NULL
-    , devFunOnly = FALSE)
-  anova(fm8.8)
-  summary(fm8.8)
-  anova(fm8.8, ddf = "Kenward-Roger")
-  emmeans::emmeans(fm8.8,specs ="Replication")
-  emmeans::emmeans(fm8.8,specs ="Column")
-  emmeans::emmeans(fm8.8,specs ="Province")
-  RCB1<- aov(Dbh~Province+Replication,data = DataExam8.1)
-  RCB<- emmeans::emmeans(RCB1,specs="Province")
-  Mixed<- emmeans::emmeans(fm8.8,specs ="Province")
-  table8.9<-data.frame(as.data.frame(summary(RCB))[c('emmean', 'SE')],
-  as.data.frame(summary(Mixed))[c('emmean', 'SE')])
-  colnames(table8.9)<- c("RCB(Mean)","RCB(SE)", "Mixed(Mean)", "Mixed(SE)")
+library(ggplot2)
+library(lmerTest)
+library(magrittr)
+library(predictmeans)
+library(supernova)
+
+data(DataExam8.1)
+
+# Pg. 155
+fm8.8 <-
+    lmerTest::lmer(
+            formula    = dbh ~ 1 + repl + col + prov + (1|repl:row) + (1|repl:col)
+          , data       = DataExam8.1
+          , REML       = TRUE
+          )
+
+# Pg. 157
+\dontrun{
+varcomp(fm8.8)
+}
+
+anova(fm8.8)
+anova(fm8.8, ddf = "Kenward-Roger")
+
+predictmeans(model = fm8.8, modelterm = "repl")
+predictmeans(model = fm8.8, modelterm = "col")
+predictmeans(model = fm8.8, modelterm = "prov")
+
+ # Pg. 161
+  RCB1  <- aov(dbh ~ prov + repl, data = DataExam8.1)
+  RCB   <- emmeans(RCB1,  specs = "prov") \%>\% as_tibble()
+  Mixed <- emmeans(fm8.8, specs = "prov") \%>\% as_tibble()
+  table8.9 <- left_join(RCB, Mixed, by = "prov", suffix = c(".RCBD", ".Mixed"))
   print(table8.9)
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

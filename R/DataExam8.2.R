@@ -1,11 +1,11 @@
-#' @title    Data for Example 8.1 from Experimental Design & Analysis for Tree Improvement
-#' @name     DataExam8.1
+#' @title    Data for Example 8.2 from Experimental Design & Analysis for Tree Improvement
+#' @name     DataExam8.2
 #' @docType  data
 #' @keywords datasets
-#' @description Exam8.1 presents the Diameter at breast height (Dbh) of 60 SeedLots
-#'              under layout of row column design with 6 rows and 10 columns in 18 
+#' @description Exam8.2 presents the Diameter at breast height (Dbh) of 60 SeedLots
+#'              under layout of row column design with 6 rows and 10 columns in 18
 #'              countries and 59 provinces of 18 selected countries.
-#' @usage    data(DataExam8.1)
+#' @usage    data(DataExam8.2)
 #' @format A \code{data.frame} with 236 rows and 8 variables.
 #' \describe{
 #'        \item{\code{Replication}}{There are 4 replication for the design}
@@ -26,13 +26,13 @@
 #'
 #' @references
 #' \enumerate{
-#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
+#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2023).\emph{Experimental Design and Analysis for Tree Improvement}.
 #'                CSIRO Publishing.
 #'              }
 #'
 #' @seealso
-#'    \code{\link{Exam8.1}}
+#'    \code{\link{Exam8.2}}
 #'
 #' @examples
-#' data(DataExam8.1)
+#' data(DataExam8.2)
 NULL

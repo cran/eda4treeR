@@ -1,6 +1,8 @@
-#' @title    Example 4.3.1 from Experimental Design and Analysis for Tree Improvement
-#' @name     Exam4.3.1
-#' @description Exam4.3.1 presents the germination count data for 4 Pre-Treatments and 6 Seedlots.
+#' @title    Example 8.2 from Experimental Design and Analysis for Tree Improvement
+#' @name     Exam8.2
+#' @description Exam8.2 presents the Diameter at breast height (Dbh) of 60 SeedLots
+#'              under layout of row column design with 6 rows and 10 columns in 18
+#'              countries and 59 provinces of 18 selected countries.
 #' @author
 #' \enumerate{
 #'          \item  Muhammad Yaseen (\email{myaseen208@@gmail.com})
@@ -14,7 +16,7 @@
 #'              }
 #'
 #' @seealso
-#'    \code{\link{DataExam4.3.1}}
+#'    \code{\link{DataExam8.2}}
 #'
 #' @importFrom car Anova
 #' @import dae
@@ -38,21 +40,24 @@
 #' library(predictmeans)
 #' library(supernova)
 #'
-#' data(DataExam4.3)
+#' data(DataExam8.2)
 #'
-#' # Pg. 57
-#' fm4.4    <-
-#'   aov(
-#'       formula     = Percent ~ Repl + Treat*SeedLot
-#'     , data        = DataExam4.3 %>%
-#'                     filter(Treat != "control")
-#'      )
+#' # Pg.
+#' fm8.2  <-
+#'   lmer(
+#'     formula = dbhmean ~ Repl + Column + Contcompf + Contcompf:Standard +
+#'               (1|Repl:Row ) + (1|Repl:Column ) + (1|Contcompv:Clone)
+#'   , data    = DataExam8.2
+#'     )
+#'\dontrun{
+#' varcomp(fm8.2)
+#' }
+#' anova(fm8.2)
+#' Anova(fm8.2, type = "II", test.statistic = "Chisq")
 #'
-#'  # Pg. 57
-#'  anova(fm4.4)
-#'  model.tables(x = fm4.4, type = "means")
+#' predictmeans(model = fm8.2, modelterm = "Repl")
+#' predictmeans(model = fm8.2, modelterm = "Column")
+#' library(emmeans)
+#' emmeans(object = fm8.2, specs = ~Contcompf|Standard)
 #'
-#'  emmeans(object = fm4.4, specs = ~ Treat)
-#'  emmeans(object = fm4.4, specs = ~ SeedLot)
-#'  emmeans(object = fm4.4, specs = ~ Treat * SeedLot)
 NULL

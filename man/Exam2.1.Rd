@@ -2,39 +2,38 @@
 % Please edit documentation in R/Exam2.1.R
 \name{Exam2.1}
 \alias{Exam2.1}
-\title{Example 2.1 from Experimental Design & Analysis for Tree Improvement}
+\title{Example 2.1 from Experimental Design and Analysis for Tree Improvement}
 \description{
 Exam2.1 is used to  compare two seed lots by using single factor ANOVA.
 }
 \examples{
+library(car)
+library(dae)
+library(dplyr)
+library(emmeans)
+library(ggplot2)
+library(lmerTest)
+library(magrittr)
+library(predictmeans)
+library(supernova)
+
 data(DataExam2.1)
-library(tidyverse)
-fmtab2.3  <-
-  lm(
-  formula     = dbh ~ SeedLot
-, data        = DataExam2.1
-# , subset
-# , weights
-# , na.action
-, method      = "qr"
-, model       = TRUE
-, x           = FALSE
-, y           = FALSE
-, qr          = TRUE
-, singular.ok = TRUE
-, contrasts   = NULL
-)
-
+# Pg. 22
+fmtab2.3  <- lm(formula = dbh ~ SeedLot, data = DataExam2.1)
+# Pg. 23
 anova(fmtab2.3)
+supernova(fmtab2.3, type = 1)
 
-DataExam2.1 \%>\%
-  dplyr::group_by(SeedLot) \%>\%
-  dplyr::summarize(Mean = mean(dbh), SD = sd(dbh))
+# Pg. 23
+emmeans(object = fmtab2.3, specs = ~ SeedLot)
+emmip(object = fmtab2.3, formula = ~ SeedLot) +
+  theme_classic()
+
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

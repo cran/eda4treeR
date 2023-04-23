@@ -1,3 +1,9 @@
+# Changes in eda4treeR Version 0.5.0
+## New Features 
+
+* Updated for new edition of book
+
+
 # Changes in eda4treeR Version 0.3.0
 ## New Features 
 
