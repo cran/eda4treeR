@@ -69,14 +69,12 @@
 #'     )
 #'
 #' # Pg. 104
-#' summary(fm6.3.1)
+#' # summary(fm6.3.1)
 #' varcomp(fm6.3.1)
-#' print(VarCorr(fm6.3.1), comp = c("Variance"))
 #' sigma2f <- 0.2584
 #' h2 <- (sigma2f/(0.3))/(Sigma2t + sigma2m + sigma2f)
 #' cbind(hmean = w, Sigma2t, sigma2m, sigma2f, h2)
 #'
-#' print("Dbh Heritability for all the Provinces")
 #' fm6.4 <-
 #'   lm(
 #'       formula     = Dbh.mean ~ Replication+Family
@@ -98,14 +96,11 @@
 #'     )
 #'
 #' # Pg. 107
-#' summary(fm6.4.1)
 #' varcomp(fm6.4.1)
-#' print(VarCorr(fm6.4.1),comp=c("Variance"))
 #' sigma2f <- 0.3514
 #' h2 <- (sigma2f/(0.3))/(Sigma2t+sigma2m+sigma2f)
 #' cbind(hmean = w, Sigma2t, sigma2m, sigma2f, h2)
 #'
-#' print("Genetic Correlation Between Dbh and Height for PNG Province")
 #' fm6.7.1 <-
 #'   lmer(
 #'       formula   = Dbh.mean ~ 1+Replication+(1|Family)
@@ -114,9 +109,7 @@
 #'     )
 #'
 #' # Pg. 116
-#' summary(fm6.7.1)
 #' varcomp(fm6.7.1)
-#' print(VarCorr(fm6.7.1),comp=c("Variance"))
 #' sigma2f[1] <- 0.2584
 #'
 #' fm6.7.2<-
@@ -127,9 +120,7 @@
 #'     )
 #'
 #' # Pg. 116
-#' summary(fm6.7.2)
 #' varcomp(fm6.7.2)
-#' print(VarCorr(fm6.7.2),comp=c("Variance"))
 #' sigma2f[2] <- 0.2711
 #'
 #' fm6.7.3 <-
@@ -141,11 +132,9 @@
 #'     )
 #'
 #' # Pg. 116
-#' summary(fm6.7.3)
 #' varcomp(fm6.7.3)
-#' print(VarCorr(fm6.7.3),comp=c("Variance"))
 #' sigma2f[3] <- 0.873
-#' sigma2xy    <- 0.5*(sigma2f[3]-sigma2f[1]-sigma2f[2])
+#' sigma2xy   <- 0.5*(sigma2f[3]-sigma2f[1]-sigma2f[2])
 #' GenCorr <- sigma2xy/sqrt(sigma2f[1]*sigma2f[2])
-#' cbind(S2x=sigma2f[1],S2y=sigma2f[2],S2.x.plus.y=sigma2f[3],GenCorr)
+#' cbind(S2x = sigma2f[1], S2y = sigma2f[2], S2.x.plus.y = sigma2f[3], GenCorr)
 NULL

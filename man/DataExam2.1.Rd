@@ -3,7 +3,7 @@
 \docType{data}
 \name{DataExam2.1}
 \alias{DataExam2.1}
-\title{Data for Example 2.1 from Experimental Design & Analysis for Tree Improvement}
+\title{Data for Example 2.1 from Experimental Design and Analysis for Tree Improvement}
 \format{
 A \code{data.frame} with 16 rows and 2 variables.
 \describe{
@@ -23,8 +23,8 @@ data(DataExam2.1)
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

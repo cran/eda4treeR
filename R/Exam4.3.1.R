@@ -50,7 +50,7 @@
 #'
 #'  # Pg. 57
 #'  anova(fm4.4)
-#'  model.tables(x = fm4.4, type = "means")
+#'  model.tables(x = fm4.4, type = "means", se = TRUE)
 #'
 #'  emmeans(object = fm4.4, specs = ~ Treat)
 #'  emmeans(object = fm4.4, specs = ~ SeedLot)

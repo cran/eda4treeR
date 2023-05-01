@@ -1,8 +1,8 @@
-#' @title    Data for Example 3.1 from Experimental Design & Analysis for Tree Improvement
+#' @title    Data for Example 3.1 from Experimental Design and Analysis for Tree Improvement
 #' @name     DataExam3.1
 #' @docType  data
 #' @keywords datasets
-#' @description Exam3.1 is part of data from Australian Centre for Agricultural Research (ACIAR) 
+#' @description Exam3.1 is part of data from Australian Centre for Agricultural Research (ACIAR)
 #'              in Queensland, Australia (Experiment 309).
 #' @usage    data(DataExam3.1)
 #' @format A \code{data.frame} with 80 rows and 6 variables.
@@ -23,8 +23,8 @@
 #'
 #' @references
 #' \enumerate{
-#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-#'                CSIRO Publishing.
+#'          \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+#'                CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
 #'              }
 #'
 #' @seealso

@@ -3,18 +3,23 @@
 \docType{data}
 \name{DataExam8.2}
 \alias{DataExam8.2}
-\title{Data for Example 8.2 from Experimental Design & Analysis for Tree Improvement}
+\title{Data for Example 8.2 from Experimental Design and Analysis for Tree Improvement}
 \format{
 A \code{data.frame} with 236 rows and 8 variables.
 \describe{
-       \item{\code{Replication}}{There are 4 replication for the design}
+       \item{\code{Repl}}{There are 4 replication for the design}
        \item{\code{Row}}{Experiment is conducted under 6 rows}\
        \item{\code{Column}}{Experiment is conducted under 4 columns}
-       \item{\code{Inoc}}{Seedling were inoculated for 2 different time periods half for one week and half for seven weeks}
-       \item{\code{Province}}{Experiment was performed in 59 provinces of selected countries}
-       \item{\code{Country}}{Data for different seedlots was collected from 18 countries}
-       \item{\code{Dbh}}{Diameter at breast height}
-       \item{\code{Country.1}}{Recoded Country lables}
+       \item{\code{Clonenum}}{Clonenum}
+       \item{\code{Contcompf}}{Contcompf}
+       \item{\code{Standard}}{Standard}
+       \item{\code{Clone}}{Clone}
+       \item{\code{dbhmean}}{dbhmean}
+       \item{\code{dbhvariance}}{dbhvariance}
+       \item{\code{htmean}}{htmean}
+       \item{\code{htvariance}}{htvariance}
+       \item{\code{count}}{count}
+       \item{\code{Contcompv}}{Contcompv}
        }
 }
 \usage{
@@ -30,8 +35,8 @@ data(DataExam8.2)
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2023).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

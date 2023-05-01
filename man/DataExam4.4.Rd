@@ -3,7 +3,7 @@
 \docType{data}
 \name{DataExam4.4}
 \alias{DataExam4.4}
-\title{Data for Example 4.4 from Experimental Design & Analysis for Tree Improvement}
+\title{Data for Example 4.4 from Experimental Design and Analysis for Tree Improvement}
 \format{
 A \code{data.frame} with 32 rows and 5 variables.
 \describe{
@@ -18,7 +18,7 @@ A \code{data.frame} with 32 rows and 5 variables.
 data(DataExam4.4)
 }
 \description{
-Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two 
+Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two
              levels of Fertilizer and two levels of Irrigation.
 }
 \examples{
@@ -27,8 +27,8 @@ data(DataExam4.4)
 }
 \references{
 \enumerate{
-         \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-               CSIRO Publishing.
+         \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+               CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
              }
 }
 \seealso{

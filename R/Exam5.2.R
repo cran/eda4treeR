@@ -41,64 +41,97 @@
 #'
 #' data(DataExam5.2)
 #'
-#' # Pg.75
-#' fm5.7 <- aov(formula = height~env*gen, data = DataExam5.2)
+#  # Pg. 75
+#' fm5.7 <- lm(formula = Ht ~ Site*SeedLot, data = DataExam5.2)
 #'
 #' # Pg. 77
 #' anova(fm5.7)
 #'
-#'
-#' fm5.9 <- aov(formula = height~env*gen, data = DataExam5.2)
+#' fm5.9 <- lm(formula = Ht ~ Site*SeedLot, data = DataExam5.2)
 #' # Pg. 77
 #' anova(fm5.9)
 #'
-#'      b <- anova(fm5.9)
-#'      Res                     <- length(b[["Sum Sq"]])
-#'      df                      <- 384
-#'      MSS                     <- 964
-#'      b[["Df"]][Res]          <- df
-#'      b[["Sum Sq"]][Res]      <- MSS*df
-#'      b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
-#'      b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
-#'      b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
+#' ANOVAfm5.9 <- anova(fm5.9)
 #'
-#'  # Pg. 77
+#' ANOVAfm5.9[4, 1:3] <- c(384, 384*964, 964)
+#' ANOVAfm5.9[3, 4]   <- ANOVAfm5.9[3, 3]/ANOVAfm5.9[4, 3]
+#' ANOVAfm5.9[3, 5]   <- pf(
+#'                             q = ANOVAfm5.9[3, 4]
+#'                         , df1 = ANOVAfm5.9[3, 1]
+#'                         , df2 = ANOVAfm5.9[4, 1]
+#'                         , lower.tail = FALSE
+#'                         )
+#' # Pg. 77
+#' ANOVAfm5.9
 #'
-#'  print(b)
 #'
-#'      X1<- DataExam5.2 %>%
-#'      group_by(env) %>%
-#'      summarize(SiteMean=mean(height))
+#' Tab5.14 <-
+#'   DataExam5.2 %>%
+#'       summarise(Mean = mean(Ht, na.rm = TRUE), .by = SeedLot) %>%
+#'     left_join(
+#'       DataExam5.2 %>%
+#'         nest_by(SeedLot) %>%
+#'         mutate(fm2 = list(lm(Ht ~ SiteMean, data = data))) %>%
+#'         summarise(Slope = coef(fm2)[2])
+#'     , by = "SeedLot"
+#'       )
 #'
-#'      Data5.2new<-merge(DataExam5.2,X1, by.x="env",by.y="env")
-#'      RegCoeff <- function(Data5.2new)
-#'      {
-#'      fm     <- lm(formula = height ~ SiteMean
-#'               ,data    = Data5.2new)
-#'                setNames(data.frame(t(coef(fm)))
-#'               ,c("intercept", "slope"))
-#'       }
-#'      RegCoeff1     <- Data5.2new %>%
-#'      group_by(gen) %>%
-#'      do(RegCoeff(.))
-#'      SeedLot.Mean <- DataExam5.2 %>%
-#'      group_by(gen) %>%
-#'      summarize(mean(height))
-#'      Tab5.14    <- data.frame(RegCoeff1,Mean=SeedLot.Mean$'mean(height)')
-#'      Tab5.14
-#'      ggplot(Tab5.14,aes(x=Mean,y=slope))+
-#'      geom_point(size=2)+
-#'      theme_bw()+
-#'      geom_text(aes(label=gen),hjust=0, vjust=0)+
-#'      labs(x="Seed Lot Mean",y="Regression Coefficient")
+#' # Pg. 81
+#' Tab5.14
 #'
-#'      Code<-c("a","a","a","a","b","b","b","b","c","d","d","d","d","e","f","g",
+#'
+#' DevSS2 <-
+#'         DataExam5.2 %>%
+#'         nest_by(SeedLot) %>%
+#'         mutate(fm2 = list(lm(Ht ~ SiteMean, data = data))) %>%
+#'         summarise(SSE = anova(fm2)[2, 2]) %>%
+#'         ungroup() %>%
+#'         summarise(Dev = sum(SSE)) %>%
+#'         as.numeric()
+#'
+#'
+#' ANOVAfm5.9.1 <-
+#'   rbind(
+#'      ANOVAfm5.9[1:3, ]
+#'    , c(
+#'         ANOVAfm5.9[2, 1]
+#'       , ANOVAfm5.9[3, 2] - DevSS2
+#'       , (ANOVAfm5.9[3, 2] - DevSS2)/ANOVAfm5.9[2, 1]
+#'       , NA
+#'       , NA
+#'       )
+#'    , c(
+#'         ANOVAfm5.9[3, 1]-ANOVAfm5.9[2, 1]
+#'       , DevSS2
+#'       , DevSS2/(ANOVAfm5.9[3, 1]-ANOVAfm5.9[2, 1])
+#'       , DevSS2/(ANOVAfm5.9[3, 1]-ANOVAfm5.9[2, 1])/ANOVAfm5.9[4, 3]
+#'       , pf(
+#'               q = DevSS2/(ANOVAfm5.9[3, 1]-ANOVAfm5.9[2, 1])/ANOVAfm5.9[4, 3]
+#'           , df1 = ANOVAfm5.9[3, 1]-ANOVAfm5.9[2, 1]
+#'           , df2 = ANOVAfm5.9[4, 1]
+#'           , lower.tail = FALSE
+#'           )
+#'       )
+#'    , ANOVAfm5.9[4, ]
+#'   )
+#' rownames(ANOVAfm5.9.1) <-
+#'   c("Site", "SeedLot", "Site:SeedLot", "  regressions", "  deviations", "Residuals")
+#' # Pg. 82
+#' ANOVAfm5.9.1
+#'
+#' Code <- c("a","a","a","a","b","b","b","b","c","d","d","d","d","e","f","g",
 #'      "h","h","i","i","j","k","l","m","n","n","n","o","p","p","q","r",
 #'      "s","t","t","u","v")
-#'      Tab5.14$Code<-Code
-#'      ggplot(Tab5.14,aes(x=Mean,y=slope))+
-#'      geom_point(size=2)+
-#'      theme_bw()+
-#'      geom_text(aes(label=Code),hjust=-0.5, vjust=-0.5)+
-#'      labs(x="Seed Lot Mean",y="Regression Coefficient")
+#'
+#' Tab5.14$Code <- Code
+#'
+#' ggplot(data = Tab5.14, mapping = aes(x = Mean, y = Slope))+
+#'  geom_point(size = 2) +
+#'  geom_text(aes(label = Code), hjust = -0.5, vjust = -0.5)+
+#'  theme_bw() +
+#'  labs(
+#'      x = "SeedLot Mean"
+#'    , y = "Regression Coefficient"
+#'    )
+#'
 NULL

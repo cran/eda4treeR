@@ -45,56 +45,102 @@
 #'
 #' # Pg. 73
 #' anova(fm5.4)
-#'
 #' # Pg. 73
 #' emmeans(object = fm5.4, specs = ~ Site)
 #' emmeans(object = fm5.4, specs = ~ SeedLot)
-#' b <- anova(fm5.4)
-#' Res                     <- length(b[["Sum Sq"]])
-#' df                      <- 208
-#' MSS                     <- 1040
-#' b[["Df"]][Res]          <- df
-#' b[["Sum Sq"]][Res]      <- MSS*df
-#' b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
-#' b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
-#' b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
-#' b
 #'
+#' ANOVAfm5.4 <- anova(fm5.4)
 #'
-#'  RegCoeff <- function(DataExam5.1){
-#'      fm     <- lm(formula = Ht ~ SiteMean
-#'               ,data    = DataExam5.1)
-#'                setNames(data.frame(t(coef(fm)))
-#'               ,c("intercept", "slope"))
-#'       }
-#'    X1       <- DataExam5.1 %>% group_by(Site) %>% summarize(sitemean=mean(Ht))
-#'    X2       <- filter(DataExam5.1, SeedLot=="13653")
-#'    X3       <- filter(DataExam5.1, SeedLot=="13871")
-#'   dffig5.1 <-merge(rbind(X2,X3),X1)
+#' ANOVAfm5.4[4, 1:3] <- c(208, 208*1040, 1040)
+#' ANOVAfm5.4[3, 4]   <- ANOVAfm5.4[3, 3]/ANOVAfm5.4[4, 3]
+#' ANOVAfm5.4[3, 5]   <- pf(
+#'                             q = ANOVAfm5.4[3, 4]
+#'                         , df1 = ANOVAfm5.4[3, 1]
+#'                         , df2 = ANOVAfm5.4[4, 1]
+#'                         , lower.tail = FALSE
+#'                         )
+#' # Pg. 73
+#' ANOVAfm5.4
 #'
-#'   # Pg. 80
-#'
-#'   ggplot(dffig5.1, aes(x=sitemean, y=Ht, color=SeedLot, shape=SeedLot)) +
+#' # Pg. 80
+#' DataExam5.1 %>%
+#'   filter(SeedLot %in% c("13653", "13871")) %>%
+#'   ggplot(
+#'     data = .
+#'   , mapping = aes(x = SiteMean, y = Ht, color = SeedLot, shape = SeedLot)
+#'   ) +
 #'   geom_point() +
-#'   geom_smooth(method=lm, se=FALSE, fullrange=TRUE)+
-#'   theme_classic()+
-#'   labs(y="Seedlot mean",x="Sitemean")
+#'   geom_smooth(method = lm, se = FALSE, fullrange = TRUE)+
+#'   theme_classic() +
+#'   labs(
+#'       x = "SiteMean"
+#'     , y = "SeedLot Mean"
+#'     )
 #'
-#'  RegCoeff     <-
-#'      DataExam5.1 %>%
-#'      group_by(SeedLot) %>%
-#'      do(RegCoeff(.))
 #'
-#'      SeedLot.Mean <-
-#'      DataExam5.1 %>%
-#'      group_by(SeedLot) %>%
-#'      summarize(mean(Ht))
 #'
-#'      Tab5.10    <- data.frame(RegCoeff,Mean=SeedLot.Mean$'mean(Ht)')
-#'      Tab5.10
-#'      ggplot(Tab5.10,aes(x=Mean,y=slope))+
-#'      geom_point(size=2)+
-#'      theme_bw()+
-#'      labs(x="Seed Lot Mean",y="Regression Coefficient")
+#' Tab5.10 <-
+#'   DataExam5.1 %>%
+#'       summarise(Mean = mean(Ht), .by = SeedLot) %>%
+#'     left_join(
+#'       DataExam5.1 %>%
+#'         nest_by(SeedLot) %>%
+#'         mutate(fm1 = list(lm(Ht ~ SiteMean, data = data))) %>%
+#'         summarise(Slope = coef(fm1)[2])
+#'     , by = "SeedLot"
+#'       )
+#'
+#' # Pg. 81
+#' Tab5.10
+#'
+#' ggplot(data = Tab5.10, mapping = aes(x = Mean, y = Slope))+
+#'  geom_point(size = 2) +
+#'  theme_bw() +
+#'  labs(
+#'      x = "SeedLot Mean"
+#'    , y = "Regression Coefficient"
+#'    )
+#'
+#' DevSS1 <-
+#'         DataExam5.1 %>%
+#'         nest_by(SeedLot) %>%
+#'         mutate(fm1 = list(lm(Ht ~ SiteMean, data = data))) %>%
+#'         summarise(SSE = anova(fm1)[2, 2]) %>%
+#'         ungroup() %>%
+#'         summarise(Dev = sum(SSE)) %>%
+#'         as.numeric()
+#'
+#' ANOVAfm5.4[2, 2]
+#'
+#' length(levels(DataExam5.1$SeedLot))
+#'
+#' ANOVAfm5.4.1 <-
+#'   rbind(
+#'      ANOVAfm5.4[1:3, ]
+#'    , c(
+#'         ANOVAfm5.4[2, 1]
+#'       , ANOVAfm5.4[3, 2] - DevSS1
+#'       , (ANOVAfm5.4[3, 2] - DevSS1)/ANOVAfm5.4[2, 1]
+#'       , NA
+#'       , NA
+#'       )
+#'    , c(
+#'         ANOVAfm5.4[3, 1]-ANOVAfm5.4[2, 1]
+#'       , DevSS1
+#'       , DevSS1/(ANOVAfm5.4[3, 1]-ANOVAfm5.4[2, 1])
+#'       , DevSS1/(ANOVAfm5.4[3, 1]-ANOVAfm5.4[2, 1])/ANOVAfm5.4[4, 3]
+#'       , pf(
+#'               q = DevSS1/(ANOVAfm5.4[3, 1]-ANOVAfm5.4[2, 1])/ANOVAfm5.4[4, 3]
+#'           , df1 = ANOVAfm5.4[3, 1]-ANOVAfm5.4[2, 1]
+#'           , df2 = ANOVAfm5.4[4, 1]
+#'           , lower.tail = FALSE
+#'           )
+#'       )
+#'    , ANOVAfm5.4[4, ]
+#'   )
+#' rownames(ANOVAfm5.4.1) <-
+#'   c("Site", "SeedLot", "Site:SeedLot", "  regressions", "  deviations", "Residuals")
+#' # Pg. 82
+#' ANOVAfm5.4.1
 #'
 NULL

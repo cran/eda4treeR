@@ -1,8 +1,8 @@
-#' @title    Data for Example 4.4 from Experimental Design & Analysis for Tree Improvement
+#' @title    Data for Example 4.4 from Experimental Design and Analysis for Tree Improvement
 #' @name     DataExam4.4
 #' @docType  data
 #' @keywords datasets
-#' @description Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two 
+#' @description Exam4.4 presents the height means for 4 seedlots under factorial arrangement for two
 #'              levels of Fertilizer and two levels of Irrigation.
 #' @usage    data(DataExam4.4)
 #' @format A \code{data.frame} with 32 rows and 5 variables.
@@ -22,8 +22,8 @@
 #'
 #' @references
 #' \enumerate{
-#'          \item Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002).\emph{Experimental Design and Analysis for Tree Improvement}.
-#'                CSIRO Publishing.
+#'          \item E.R. Williams, C.E. Harwood and A.C. Matheson (2023). \emph{Experimental Design and Analysis for Tree Improvement}.
+#'                CSIRO Publishing (\href{https://www.publish.csiro.au/book/3145/}{https://www.publish.csiro.au/book/3145/}).
 #'              }
 #'
 #' @seealso

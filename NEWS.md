@@ -1,3 +1,8 @@
+# Changes in eda4treeR Version 0.6.0
+## New Features 
+
+* Updated the code and documentation
+
 # Changes in eda4treeR Version 0.5.0
 ## New Features 
 

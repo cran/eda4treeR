@@ -1,7 +1,7 @@
 Package: eda4treeR
 Type: Package
 Title: Experimental Design and Analysis for Tree Improvement
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: 
     c(
         person(
@@ -22,7 +22,7 @@ Authors@R:
         )
       , person(
           c("Emlyn", "Williams")
-        , email = "emlyn@alphastat.net"
+        , email = "emlyn.williams@anu.edu.au"
         , role = c("aut", "ctb")
         )
         )
@@ -44,11 +44,11 @@ Note: 1. Asian Development Bank (ADB), Islamabad, Pakistan. 2. Benazir
         Department of Mathematics and Statistics, University of
         Agriculture Faisalabad, Pakistan.
 NeedsCompilation: no
-Packaged: 2023-04-22 23:56:40 UTC; hp
+Packaged: 2023-05-01 03:16:46 UTC; hp
 Author: Muhammad Yaseen [aut, cre, cph]
     (<https://orcid.org/0000-0002-5923-1714>),
   Sami Ullah [aut, ctb],
   Kent M. Eskridge [aut, ctb],
   Emlyn Williams [aut, ctb]
 Repository: CRAN
-Date/Publication: 2023-04-23 04:10:02 UTC
+Date/Publication: 2023-05-01 04:40:02 UTC

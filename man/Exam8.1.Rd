@@ -24,7 +24,7 @@ data(DataExam8.1)
 # Pg. 141
 fm8.4 <-
   aov(
-    formula = dbh ~ inoc + repl + Error(repl/inoc) + inoc*country*prov
+    formula = dbh ~ inoc + Error(repl/inoc) + inoc*country*prov
   , data    = DataExam8.1
      )
 
@@ -32,11 +32,11 @@ fm8.4 <-
 summary(fm8.4)
 
 # Pg. 150
-model.tables(x = fm8.4, type = "means", se   = FALSE)
+model.tables(x = fm8.4, type = "means")
 
 RESFit <-
     data.frame(
-     fittedvalue    = fitted.aovlist(fm8.4)
+      fittedvalue    = fitted.aovlist(fm8.4)
     , residualvalue = proj(fm8.4)$Within[,"Residuals"]
     )
 
@@ -48,9 +48,9 @@ theme_bw()
 # Pg. 153
 fm8.6 <-
  aov(
-   formula      = dbh ~ inoc + repl + col + repl/row + repl/col +
-                        prov + inoc/prov
- , data         = DataExam8.1
+   formula = terms(dbh ~ inoc + repl + col + repl:row + repl:col +
+                        prov + inoc:prov, keep.order = TRUE)
+ , data   = DataExam8.1
  )
 summary(fm8.6)
 }
