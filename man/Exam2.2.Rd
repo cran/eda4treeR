@@ -15,20 +15,22 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam2.2)
 
 # Pg. 24
-fmtab2.5 <- lm(formula  = dbh ~ Blk + SeedLot, data = DataExam2.2)
+fmtab2.5 <-
+          lm(
+             formula  = dbh ~ block + seedlot
+           , data     = DataExam2.2
+           )
 
 # Pg. 26
 anova(fmtab2.5)
-supernova(fmtab2.5, type = 1)
 
 # Pg. 26
-emmeans(object = fmtab2.5, specs = ~ SeedLot)
-emmip(object = fmtab2.5, formula = ~ SeedLot) +
+emmeans(object = fmtab2.5, specs = ~ seedlot)
+emmip(object = fmtab2.5, formula = ~ seedlot) +
   theme_classic()
 
 }

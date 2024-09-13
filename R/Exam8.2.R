@@ -27,7 +27,6 @@
 #' @importFrom magrittr %>%
 #' @import predictmeans
 #' @importFrom stats lm anova model.tables
-#' @importFrom supernova supernova
 #'
 #' @examples
 #' library(car)
@@ -38,15 +37,16 @@
 #' library(lmerTest)
 #' library(magrittr)
 #' library(predictmeans)
-#' library(supernova)
 #'
 #' data(DataExam8.2)
 #'
 #' # Pg.
 #' fm8.2  <-
-#'   lmer(
-#'     formula = dbhmean ~ Repl + Column + Contcompf + Contcompf:Standard +
-#'               (1|Repl:Row ) + (1|Repl:Column ) + (1|Contcompv:Clone)
+#'   lmerTest::lmer(
+#'     formula = dbh ~ repl + column +
+#'                     contcompf + contcompf:standard +
+#'                     (1|repl:row) + (1|repl:column) +
+#'                     (1|contcompv:clone)
 #'   , data    = DataExam8.2
 #'     )
 #'\dontrun{
@@ -55,9 +55,9 @@
 #' anova(fm8.2)
 #' Anova(fm8.2, type = "II", test.statistic = "Chisq")
 #'
-#' predictmeans(model = fm8.2, modelterm = "Repl")
-#' predictmeans(model = fm8.2, modelterm = "Column")
-#' library(emmeans)
-#' emmeans(object = fm8.2, specs = ~Contcompf|Standard)
+#' predictmeans(model = fm8.2, modelterm = "repl")
+#' predictmeans(model = fm8.2, modelterm = "column")
+#'
+#' emmeans(object = fm8.2, specs = ~contcompf|standard)
 #'
 NULL

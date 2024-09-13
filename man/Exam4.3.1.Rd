@@ -15,25 +15,24 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam4.3)
 
 # Pg. 57
 fm4.4    <-
   aov(
-      formula     = Percent ~ Repl + Treat*SeedLot
-    , data        = DataExam4.3 \%>\%
-                    filter(Treat != "control")
+      formula = percent ~ repl + treat*seedlot
+    , data    = DataExam4.3 \%>\%
+                 filter(treat != "control")
      )
 
  # Pg. 57
  anova(fm4.4)
  model.tables(x = fm4.4, type = "means", se = TRUE)
 
- emmeans(object = fm4.4, specs = ~ Treat)
- emmeans(object = fm4.4, specs = ~ SeedLot)
- emmeans(object = fm4.4, specs = ~ Treat * SeedLot)
+ emmeans(object = fm4.4, specs = ~ treat)
+ emmeans(object = fm4.4, specs = ~ seedlot)
+ emmeans(object = fm4.4, specs = ~ treat * seedlot)
 }
 \references{
 \enumerate{

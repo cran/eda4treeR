@@ -6,10 +6,10 @@
 #' @usage    data(DataExam5.1)
 #' @format A \code{data.frame} with 108 rows and 4 variables.
 #' \describe{
-#'        \item{\code{Site}}{Sites for the experiment}
-#'        \item{\code{SeedLot}}{Seed lot number}
-#'        \item{\code{Ht}}{Height of the plants}
-#'        \item{\code{SiteMean}}{Mean Height of Each Site}
+#'        \item{\code{site}}{Sites for the experiment}
+#'        \item{\code{seedlot}}{Seed lot number}
+#'        \item{\code{ht}}{Height of the plants}
+#'        \item{\code{sitemean}}{Mean Height of Each Site}
 #'          }
 #'
 #' @author

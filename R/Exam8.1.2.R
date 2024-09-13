@@ -27,7 +27,6 @@
 #' @importFrom magrittr %>%
 #' @import predictmeans
 #' @importFrom stats lm anova model.tables
-#' @importFrom supernova supernova
 #'
 #' @examples
 #' library(car)
@@ -38,22 +37,34 @@
 #' library(lmerTest)
 #' library(magrittr)
 #' library(predictmeans)
-#' library(supernova)
 #'
 #' data(DataExam8.1)
 #'
 #' # Pg. 167
-#' fm8.11 <- aov(formula = dbh ~ country + country:prov, data = DataExam8.1)
+#' fm8.11 <-
+#'   aov(
+#'        formula = dbh ~ country + country:prov
+#'      , data    = DataExam8.1
+#'       )
 #'
 #'   b <- anova(fm8.11)
-#'   Res                     <- length(b[["Sum Sq"]])
-#'   df                      <- 119
-#'   MSS                     <- 0.1951
-#'   b[["Df"]][Res]          <- df
-#'   b[["Sum Sq"]][Res]      <- MSS*df
-#'   b[["Mean Sq"]][Res]     <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
-#'   b[["F value"]][1:Res-1] <- b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
-#'   b[["Pr(>F)"]][Res-1]     <- df(b[["F value"]][Res-1],b[["Df"]][Res-1],b[["Df"]][Res])
+#'   Res <- length(b[["Sum Sq"]])
+#'   df  <- 119
+#'   MSS <- 0.1951
+#'
+#'   b[["Df"]][Res] <- df
+#'   b[["Sum Sq"]][Res] <- MSS*df
+#'   b[["Mean Sq"]][Res] <- b[["Sum Sq"]][Res]/b[["Df"]][Res]
+#'
+#'   b[["F value"]][1:Res-1] <-
+#'             b[["Mean Sq"]][1:Res-1]/b[["Mean Sq"]][Res]
+#'
+#'   b[["Pr(>F)"]][Res-1] <-
+#'      df(
+#'        b[["F value"]][Res-1]
+#'      , b[["Df"]][Res-1]
+#'      , b[["Df"]][Res]
+#'      )
 #'   b
 #'
 #'  emmeans(fm8.11, specs = "country")

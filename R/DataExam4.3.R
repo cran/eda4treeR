@@ -6,14 +6,14 @@
 #' @usage    data(DataExam4.3)
 #' @format A \code{data.frame} with 72 rows and 8 variables.
 #' \describe{
-#'        \item{\code{Row}}{Row number of different Seedlots}
-#'        \item{\code{Column}}{Column number of differnt Trees}
-#'        \item{\code{Replication}}{Replication number of Treatment}
-#'        \item{\code{Contcomp}}{Control or Trated Plot}
-#'        \item{\code{Pretreatment}}{Treatment types}
-#'        \item{\code{SeedLot}}{Seed lot number}
-#'        \item{\code{GerminationCount}}{Number of germinated seeds out of 25}
-#'        \item{\code{Percent}}{Germination Percentage}
+#'        \item{\code{rep}}{Replication number of Treatment}
+#'        \item{\code{row}}{Row number of different Seedlots}
+#'        \item{\code{column}}{Column number of differnt Trees}
+#'        \item{\code{seedlot}}{Seed lot number}
+#'        \item{\code{treat}}{Treatment types}
+#'        \item{\code{count}}{Number of germinated seeds out of 25}
+#'        \item{\code{percent}}{Germination Percentage}
+#'        \item{\code{contcomp}}{Control or Trated Plot}
 #'        }
 #'
 #' @author

@@ -26,7 +26,6 @@
 #' @importFrom magrittr %>%
 #' @import predictmeans
 #' @importFrom stats lm anova model.tables
-#' @importFrom supernova supernova
 #'
 #' @examples
 #' library(car)
@@ -37,7 +36,6 @@
 #' library(lmerTest)
 #' library(magrittr)
 #' library(predictmeans)
-#' library(supernova)
 #'
 #' data(DataExam6.2)
 #'
@@ -63,9 +61,9 @@
 #'
 #' fm6.3.1 <-
 #'   lmer(
-#'       formula   = Dbh.mean ~ 1 + Replication + (1|Family)
-#'     , data      = DataExam6.2.1
-#'     , REML      = TRUE
+#'       formula = Dbh.mean ~ 1 + Replication + (1|Family)
+#'     , data    = DataExam6.2.1
+#'     , REML    = TRUE
 #'     )
 #'
 #' # Pg. 104
@@ -77,8 +75,8 @@
 #'
 #' fm6.4 <-
 #'   lm(
-#'       formula     = Dbh.mean ~ Replication+Family
-#'      , data        = DataExam6.2
+#'       formula = Dbh.mean ~ Replication+Family
+#'      , data   = DataExam6.2
 #'      )
 #'
 #' b    <- anova(fm6.4)
@@ -89,10 +87,10 @@
 #' sigma2m <- S2-(Sigma2t/w)
 #'
 #' fm6.4.1 <-
-#' lmer(
-#'       formula   = Dbh.mean ~ 1 + Replication + Province + (1|Family)
-#'     , data      = DataExam6.2
-#'     , REML      = TRUE
+#'  lmer(
+#'    formula = Dbh.mean ~ 1 + Replication + Province + (1|Family)
+#'  , data    = DataExam6.2
+#'  , REML    = TRUE
 #'     )
 #'
 #' # Pg. 107
@@ -102,11 +100,11 @@
 #' cbind(hmean = w, Sigma2t, sigma2m, sigma2f, h2)
 #'
 #' fm6.7.1 <-
-#'   lmer(
-#'       formula   = Dbh.mean ~ 1+Replication+(1|Family)
-#'     , data      = DataExam6.2.1
-#'     , REML      = TRUE
-#'     )
+#'  lmer(
+#'    formula = Dbh.mean ~ 1+Replication+(1|Family)
+#'  , data    = DataExam6.2.1
+#'  , REML = TRUE
+#'  )
 #'
 #' # Pg. 116
 #' varcomp(fm6.7.1)
@@ -114,27 +112,32 @@
 #'
 #' fm6.7.2<-
 #'  lmer(
-#'       formula   = Ht.mean ~ 1 + Replication + (1|Family)
-#'     , data      = DataExam6.2.1
-#'     , REML      = TRUE
-#'     )
+#'    formula = Ht.mean ~ 1 + Replication + (1|Family)
+#'  , data    = DataExam6.2.1
+#'  , REML    = TRUE
+#'    )
 #'
 #' # Pg. 116
 #' varcomp(fm6.7.2)
 #' sigma2f[2] <- 0.2711
 #'
 #' fm6.7.3 <-
-#'   lmer(
-#'       formula   = Sum.means ~ 1 + Replication + (1|Family)
-#'     , data      = DataExam6.2.1
-#'     , REML      = TRUE
-#'     , control   = lmerControl()
-#'     )
+#'  lmer(
+#'    formula = Sum.means ~ 1 + Replication + (1|Family)
+#'  , data    = DataExam6.2.1
+#'  , REML    = TRUE
+#'  , control = lmerControl()
+#'  )
 #'
 #' # Pg. 116
 #' varcomp(fm6.7.3)
 #' sigma2f[3] <- 0.873
 #' sigma2xy   <- 0.5*(sigma2f[3]-sigma2f[1]-sigma2f[2])
 #' GenCorr <- sigma2xy/sqrt(sigma2f[1]*sigma2f[2])
-#' cbind(S2x = sigma2f[1], S2y = sigma2f[2], S2.x.plus.y = sigma2f[3], GenCorr)
+#' cbind(
+#'      S2x = sigma2f[1]
+#'    , S2y = sigma2f[2]
+#'    , S2.x.plus.y = sigma2f[3]
+#'    , GenCorr
+#'    )
 NULL

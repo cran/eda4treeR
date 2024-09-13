@@ -15,16 +15,24 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam5.2)
 
-fm5.7 <- lm(formula = Ht ~ Site*SeedLot, data = DataExam5.2)
+# Pg. 75
+fm5.7 <-
+ lm(
+     formula = ht ~ site*seedlot
+   , data    = DataExam5.2
+   )
 
 # Pg. 77
 anova(fm5.7)
 
-fm5.9 <- lm(formula = Ht ~ Site*SeedLot, data = DataExam5.2)
+fm5.9 <-
+ lm(
+     formula = ht ~ site*seedlot
+   , data    = DataExam5.2
+   )
 # Pg. 77
 anova(fm5.9)
 
@@ -32,39 +40,44 @@ ANOVAfm5.9 <- anova(fm5.9)
 
 ANOVAfm5.9[4, 1:3] <- c(384, 384*964, 964)
 ANOVAfm5.9[3, 4]   <- ANOVAfm5.9[3, 3]/ANOVAfm5.9[4, 3]
-ANOVAfm5.9[3, 5]   <- pf(
-                            q = ANOVAfm5.9[3, 4]
-                        , df1 = ANOVAfm5.9[3, 1]
-                        , df2 = ANOVAfm5.9[4, 1]
-                        , lower.tail = FALSE
-                        )
+ANOVAfm5.9[3, 5]   <-
+    pf(
+        q = ANOVAfm5.9[3, 4]
+    , df1 = ANOVAfm5.9[3, 1]
+    , df2 = ANOVAfm5.9[4, 1]
+    , lower.tail = FALSE
+    )
 # Pg. 77
 ANOVAfm5.9
 
 
 Tab5.14 <-
   DataExam5.2 \%>\%
-      summarise(Mean = mean(Ht, na.rm = TRUE), .by = SeedLot) \%>\%
-    left_join(
+  summarise(
+       Mean = round(mean(ht, na.rm = TRUE), 0)
+     , .by  = seedlot
+     ) \%>\%
+   left_join(
       DataExam5.2 \%>\%
-        nest_by(SeedLot) \%>\%
-        mutate(fm2 = list(lm(Ht ~ SiteMean, data = data))) \%>\%
-        summarise(Slope = coef(fm2)[2])
-    , by = "SeedLot"
-      )
+      nest_by(seedlot) \%>\%
+      mutate(fm2 = list(lm(ht ~ sitemean, data = data))) \%>\%
+      summarise(Slope = round(coef(fm2)[2], 2))
+    , by = "seedlot"
+     ) \%>\%
+  as.data.frame()
 
 # Pg. 81
 Tab5.14
 
 
 DevSS2 <-
-        DataExam5.2 \%>\%
-        nest_by(SeedLot) \%>\%
-        mutate(fm2 = list(lm(Ht ~ SiteMean, data = data))) \%>\%
-        summarise(SSE = anova(fm2)[2, 2]) \%>\%
-        ungroup() \%>\%
-        summarise(Dev = sum(SSE)) \%>\%
-        as.numeric()
+  DataExam5.2 \%>\%
+  nest_by(seedlot) \%>\%
+  mutate(fm2 = list(lm(ht ~ sitemean, data = data))) \%>\%
+  summarise(SSE = anova(fm2)[2, 2]) \%>\%
+  ungroup() \%>\%
+  summarise(Dev = sum(SSE)) \%>\%
+  as.numeric()
 
 
 ANOVAfm5.9.1 <-
@@ -92,25 +105,44 @@ ANOVAfm5.9.1 <-
    , ANOVAfm5.9[4, ]
   )
 rownames(ANOVAfm5.9.1) <-
-  c("Site", "SeedLot", "Site:SeedLot", "  regressions", "  deviations", "Residuals")
+  c(
+     "site"
+   , "seedlot"
+   , "site:seedlot"
+   , "  regressions"
+   , "  deviations"
+   , "Residuals"
+   )
+
 # Pg. 82
 ANOVAfm5.9.1
 
-Code <- c("a","a","a","a","b","b","b","b","c","d","d","d","d","e","f","g",
-     "h","h","i","i","j","k","l","m","n","n","n","o","p","p","q","r",
-     "s","t","t","u","v")
+Code <-
+ c(
+   "a","a","a","a","b","b","b","b"
+ , "c","d","d","d","d","e","f","g"
+ , "h","h","i","i","j","k","l","m"
+ ,"n","n","n","o","p","p","q","r"
+ , "s","t","t","u","v"
+ )
 
 Tab5.14$Code <- Code
 
-ggplot(data = Tab5.14, mapping = aes(x = Mean, y = Slope))+
+ggplot(
+   data = Tab5.14
+ , mapping = aes(x = Mean, y = Slope)
+ ) +
  geom_point(size = 2) +
- geom_text(aes(label = Code), hjust = -0.5, vjust = -0.5)+
+ geom_text(
+    mapping = aes(label = Code)
+  , hjust   = -0.5
+  , vjust   = -0.5
+ ) +
  theme_bw() +
  labs(
      x = "SeedLot Mean"
    , y = "Regression Coefficient"
    )
-
 }
 \references{
 \enumerate{

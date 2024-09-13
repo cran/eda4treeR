@@ -1,27 +1,27 @@
 Package: eda4treeR
 Type: Package
 Title: Experimental Design and Analysis for Tree Improvement
-Version: 0.6.0
+Version: 1.1.0
 Authors@R: 
     c(
         person(
-          c("Muhammad", "Yaseen")
+          "Muhammad", "Yaseen"
         , email = "myaseen208@gmail.com"
         , role = c("aut", "cre", "cph")
         , comment = c(ORCID = "0000-0002-5923-1714")
         )
      , person(
-          c("Sami", "Ullah")
+          "Sami", "Ullah"
         , email = "samiullahuos@gmail.com"
         , role = c("aut", "ctb")
         )
       , person(
-          c("Kent", "M.", "Eskridge")
+          "Kent",  "Eskridge"
         , email = "keskridge1@unl.edu"
         , role = c("aut", "ctb")
         )
       , person(
-          c("Emlyn", "Williams")
+          "Emlyn", "Williams"
         , email = "emlyn.williams@anu.edu.au"
         , role = c("aut", "ctb")
         )
@@ -37,18 +37,19 @@ URL: https://github.com/MYaseen208/eda4treeR
         https://myaseen208.com/eda4treeR/ https://myaseen208.com/EDATR/
 BugReports: https://github.com/myaseen208/eda4treeR/issues
 LazyData: TRUE
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
+Encoding: UTF-8
 Suggests: testthat
 Note: 1. Asian Development Bank (ADB), Islamabad, Pakistan. 2. Benazir
         Income Support Programme (BISP), Islamabad, Pakistan. 3.
         Department of Mathematics and Statistics, University of
         Agriculture Faisalabad, Pakistan.
 NeedsCompilation: no
-Packaged: 2023-05-01 03:16:46 UTC; hp
+Packaged: 2024-09-13 21:21:45 UTC; myaseen208
 Author: Muhammad Yaseen [aut, cre, cph]
     (<https://orcid.org/0000-0002-5923-1714>),
   Sami Ullah [aut, ctb],
-  Kent M. Eskridge [aut, ctb],
+  Kent Eskridge [aut, ctb],
   Emlyn Williams [aut, ctb]
 Repository: CRAN
-Date/Publication: 2023-05-01 04:40:02 UTC
+Date/Publication: 2024-09-13 21:50:02 UTC

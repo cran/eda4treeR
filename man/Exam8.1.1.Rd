@@ -17,17 +17,17 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam8.1)
 
 # Pg. 155
 fm8.8 <-
-    lmerTest::lmer(
-            formula    = dbh ~ 1 + repl + col + prov + (1|repl:row) + (1|repl:col)
-          , data       = DataExam8.1
-          , REML       = TRUE
-          )
+ lmerTest::lmer(
+     formula = dbh ~ 1 + repl + col + prov +
+                     (1|repl:row) + (1|repl:col)
+   , data   = DataExam8.1
+   , REML   = TRUE
+   )
 
 # Pg. 157
 \dontrun{
@@ -42,10 +42,23 @@ predictmeans(model = fm8.8, modelterm = "col")
 predictmeans(model = fm8.8, modelterm = "prov")
 
  # Pg. 161
-  RCB1  <- aov(dbh ~ prov + repl, data = DataExam8.1)
-  RCB   <- emmeans(RCB1,  specs = "prov") \%>\% as_tibble()
-  Mixed <- emmeans(fm8.8, specs = "prov") \%>\% as_tibble()
-  table8.9 <- left_join(RCB, Mixed, by = "prov", suffix = c(".RCBD", ".Mixed"))
+  RCB1 <-
+        aov(dbh ~ prov + repl, data = DataExam8.1)
+  RCB  <-
+        emmeans(RCB1,  specs = "prov") \%>\%
+        as_tibble()
+
+  Mixed <-
+          emmeans(fm8.8, specs = "prov") \%>\%
+          as_tibble()
+
+  table8.9 <-
+      left_join(
+         x      = RCB
+       , y      = Mixed
+       , by     = "prov"
+       , suffix = c(".RCBD", ".Mixed")
+       )
   print(table8.9)
 }
 \references{

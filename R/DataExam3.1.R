@@ -7,12 +7,12 @@
 #' @usage    data(DataExam3.1)
 #' @format A \code{data.frame} with 80 rows and 6 variables.
 #' \describe{
-#'        \item{\code{Repl}}{Replication number of different Seedlots}
+#'        \item{\code{repl}}{Replication number of different Seedlots}
 #'        \item{\code{PlotNo}}{Plot No of differnt Trees}
-#'        \item{\code{SeedLot}}{Seed Lot number}
+#'        \item{\code{seedlot}}{Seed Lot number}
 #'        \item{\code{TreeNo}}{Tree number of Seedlots}
-#'        \item{\code{Ht}}{Height in meter}
-#'        \item{\code{Dgl}}{Diameter at ground level}
+#'        \item{\code{ht}}{Height in meter}
+#'        \item{\code{dgl}}{Diameter at ground level}
 #'        }
 #'
 #' @author

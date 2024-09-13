@@ -28,7 +28,6 @@
 #' @importFrom magrittr %>%
 #' @import predictmeans
 #' @importFrom stats lm anova model.tables
-#' @importFrom supernova supernova
 #'
 #' @examples
 #' library(car)
@@ -39,16 +38,15 @@
 #' library(lmerTest)
 #' library(magrittr)
 #' library(predictmeans)
-#' library(supernova)
 #'
 #' data(DataExam4.4)
 #'
 #' # Pg. 58
 #' fm4.6    <-
 #'   aov(
-#'       formula     = Height ~ Rep + Irrig*Ferti*SeedDLot +
-#'                              Error(Rep/Irrig:Ferti)
-#'     , data        = DataExam4.4
+#'       formula = height ~ repl + irrig*fert*seedlot +
+#'                          Error(repl/irrig:fert)
+#'     , data    = DataExam4.4
 #'     )
 #'
 #' # Pg. 61
@@ -58,8 +56,8 @@
 #' model.tables(x = fm4.6, type = "means")
 #'
 #' # Pg. 61
-#' emmeans(object = fm4.6, specs = ~ Irrig)
-#' emmip(object = fm4.6, formula  = ~ Irrig) +
+#' emmeans(object = fm4.6, specs = ~ irrig)
+#' emmip(object = fm4.6, formula  = ~ irrig) +
 #'     theme_classic()
 #'
 NULL

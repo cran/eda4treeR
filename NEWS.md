@@ -1,4 +1,10 @@
-# Changes in eda4treeR Version 0.6.0
+# Changes in eda4treeR Version 1.1.0
+## New Features 
+
+* Updated the DESCRIPTION file to fulfill the requirements of CRAN
+
+
+# Changes in eda4treeR Version 1.0.0
 ## New Features 
 
 * Updated the code and documentation

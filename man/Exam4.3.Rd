@@ -15,16 +15,16 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam4.3)
 
  # Pg. 50
  fm4.2    <-
    aov(
-       formula = Percent ~ Repl + Contcomp + SeedLot +
-                           Treat/Contcomp + Contcomp /SeedLot +
-                           Treat/ Contcomp/SeedLot
+       formula =
+       percent ~ repl + contcomp + seedlot +
+                 treat/contcomp + contcomp/seedlot +
+                 treat/contcomp/seedlot
       , data   = DataExam4.3
      )
 
@@ -34,18 +34,25 @@ data(DataExam4.3)
  # Pg. 54
  model.tables(x = fm4.2, type = "means")
 
- emmeans(object = fm4.2, specs = ~ Contcomp)
- emmeans(object = fm4.2, specs = ~ SeedLot)
- emmeans(object = fm4.2, specs = ~ Contcomp + Treat)
- emmeans(object = fm4.2, specs = ~ Contcomp + SeedLot)
- emmeans(object = fm4.2, specs = ~ Contcomp + Treat + SeedLot)
+ emmeans(object = fm4.2, specs = ~ contcomp)
+ emmeans(object = fm4.2, specs = ~ seedlot)
+ emmeans(object = fm4.2, specs = ~ contcomp + treat)
+ emmeans(object = fm4.2, specs = ~ contcomp + seedlot)
+ emmeans(object = fm4.2, specs = ~ contcomp + treat + seedlot)
 
  DataExam4.3 \%>\%
-   dplyr::group_by(Treat, Contcomp, SeedLot) \%>\%
-   dplyr::summarize(Mean=mean(Percent))
-   RESFIT <- data.frame(residualvalue=residuals(fm4.2),fittedvalue=fitted.values(fm4.2))
-   ggplot(mapping = aes(x = fitted.values(fm4.2), y = residuals(fm4.2)))+
-   geom_point(size = 2)+
+   dplyr::group_by(treat, contcomp, seedlot) \%>\%
+   dplyr::summarize(Mean = mean(percent))
+   RESFIT <-
+          data.frame(
+           residualvalue = residuals(fm4.2)
+         , fittedvalue   = fitted.values(fm4.2)
+         )
+
+   ggplot(mapping = aes(
+                         x = fitted.values(fm4.2)
+                       , y = residuals(fm4.2))) +
+   geom_point(size = 2) +
    labs(
        x = "Fitted Values"
      , y = "Residuals"

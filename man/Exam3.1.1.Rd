@@ -16,19 +16,22 @@ library(ggplot2)
 library(lmerTest)
 library(magrittr)
 library(predictmeans)
-library(supernova)
 
 data(DataExam3.1.1)
 
 # Pg. 36
-fm3.8 <- lm(formula  = Mean ~ Repl + SeedLot, data = DataExam3.1.1)
+fm3.8 <-
+      lm(
+         formula = ht ~ repl + seedlot
+       , data    = DataExam3.1.1
+       )
 
 # Pg. 40
 anova(fm3.8)
 
 # Pg. 40
-emmeans(object = fm3.8, specs = ~ SeedLot)
-emmip(object = fm3.8, formula  = ~ SeedLot) +
+emmeans(object = fm3.8, specs  = ~seedlot)
+emmip(object = fm3.8, formula  = ~seedlot) +
  theme_classic()
 
 }

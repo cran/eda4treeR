@@ -7,11 +7,11 @@
 \format{
 A \code{data.frame} with 32 rows and 5 variables.
 \describe{
-       \item{\code{Rep}}{Replication number}
-       \item{\code{Irrig}}{Irrigation type}
-       \item{\code{Ferti}}{Fertilizer type}
-       \item{\code{SeedDLot}}{Seed Lot number}
-       \item{\code{Height}}{Height of the plants}
+       \item{\code{repl}}{Replication number}
+       \item{\code{irrig}}{Irrigation type}
+       \item{\code{fert}}{Fertilizer type}
+       \item{\code{seedlot}}{Seed Lot number}
+       \item{\code{height}}{Height of the plants}
          }
 }
 \usage{

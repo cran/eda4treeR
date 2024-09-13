@@ -8,19 +8,19 @@
 #' @usage    data(DataExam8.2)
 #' @format A \code{data.frame} with 236 rows and 8 variables.
 #' \describe{
-#'        \item{\code{Repl}}{There are 4 replication for the design}
-#'        \item{\code{Row}}{Experiment is conducted under 6 rows}\
-#'        \item{\code{Column}}{Experiment is conducted under 4 columns}
-#'        \item{\code{Clonenum}}{Clonenum}
-#'        \item{\code{Contcompf}}{Contcompf}
-#'        \item{\code{Standard}}{Standard}
-#'        \item{\code{Clone}}{Clone}
-#'        \item{\code{dbhmean}}{dbhmean}
-#'        \item{\code{dbhvariance}}{dbhvariance}
-#'        \item{\code{htmean}}{htmean}
-#'        \item{\code{htvariance}}{htvariance}
+#'        \item{\code{repl}}{There are 4 replication for the design}
+#'        \item{\code{row}}{Experiment is conducted under 6 rows}\
+#'        \item{\code{column}}{Experiment is conducted under 4 columns}
+#'        \item{\code{clonenum}}{Clonenum}
+#'        \item{\code{contcompf}}{Contcompf}
+#'        \item{\code{standard}}{Standard}
+#'        \item{\code{clone}}{Clone}
+#'        \item{\code{dbh}}{dbhmean}
+#'        \item{\code{dbhvar}}{dbhvariance}
+#'        \item{\code{ht}}{htmean}
+#'        \item{\code{htvar}}{htvariance}
 #'        \item{\code{count}}{count}
-#'        \item{\code{Contcompv}}{Contcompv}
+#'        \item{\code{contcompv}}{Contcompv}
 #'        }
 #'
 #' @author

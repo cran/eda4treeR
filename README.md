@@ -15,7 +15,7 @@
 5.  [Department of Statistics, University of Nebraska-Lincoln, Lincoln
     NE, USA](https://statistics.unl.edu/kent-m-eskridge)
 6.  [Australian National University, Canberra, ACT,
-    Australia](https://services.anu.edu.au/business-units/research-initiatives-and-infrastructure/statistical-support-network/associate)
+    Australia](https://services.anu.edu.au/business-units/research-initiatives-and-infrastructure/statistical-support-network/associate-professor-emlyn-williams)
 
 ------------------------------------------------------------------------
 

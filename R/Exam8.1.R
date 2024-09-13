@@ -27,7 +27,6 @@
 #' @importFrom magrittr %>%
 #' @import predictmeans
 #' @importFrom stats lm anova model.tables
-#' @importFrom supernova supernova
 #'
 #' @examples
 #' library(car)
@@ -38,14 +37,14 @@
 #' library(lmerTest)
 #' library(magrittr)
 #' library(predictmeans)
-#' library(supernova)
 #'
 #' data(DataExam8.1)
 #'
 #' # Pg. 141
 #' fm8.4 <-
 #'   aov(
-#'     formula = dbh ~ inoc + Error(repl/inoc) + inoc*country*prov
+#'     formula = dbh ~ inoc + Error(repl/inoc) +
+#'                     inoc*country*prov
 #'   , data    = DataExam8.1
 #'      )
 #'
@@ -57,20 +56,30 @@
 #'
 #' RESFit <-
 #'     data.frame(
-#'       fittedvalue    = fitted.aovlist(fm8.4)
+#'       fittedvalue   = fitted.aovlist(fm8.4)
 #'     , residualvalue = proj(fm8.4)$Within[,"Residuals"]
 #'     )
 #'
-#' ggplot(RESFit,aes(x=fittedvalue,y=residualvalue))+
-#' geom_point(size=2)+
-#' labs(x="Residuals vs Fitted Values", y="")+
+#' ggplot(
+#'    data    =  RESFit
+#'  , mapping = aes(x = fittedvalue, y = residualvalue)
+#'  ) +
+#' geom_point(size = 2) +
+#' labs(
+#'    x = "Residuals vs Fitted Values"
+#'  , y = ""
+#'  ) +
 #' theme_bw()
 #'
 #' # Pg. 153
 #' fm8.6 <-
 #'  aov(
-#'    formula = terms(dbh ~ inoc + repl + col + repl:row + repl:col +
-#'                         prov + inoc:prov, keep.order = TRUE)
+#'    formula = terms(
+#'                    dbh ~ inoc + repl + col +
+#'                          repl:row + repl:col +
+#'                          prov + inoc:prov
+#'                    , keep.order = TRUE
+#'                    )
 #'  , data   = DataExam8.1
 #'  )
 #' summary(fm8.6)

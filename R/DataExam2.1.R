@@ -6,7 +6,7 @@
 #' @usage    data(DataExam2.1)
 #' @format A \code{data.frame} with 16 rows and 2 variables.
 #' \describe{
-#'        \item{\code{Seedlot}}{Two Seedlots Seed Orchad (SO) and routin plantation (P)}
+#'        \item{\code{seedlot}}{Two Seedlots Seed Orchad (SO) and routin plantation (P)}
 #'        \item{\code{dbh}}{Diameter at breast height}
 #'        }
 #'

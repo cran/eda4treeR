@@ -42,29 +42,50 @@
 #' data(DataExam3.1)
 #'
 #' # Pg. 28
-#' fmtab3.3 <- lm(formula = Ht ~ Repl*SeedLot, data = DataExam3.1)
+#' fmtab3.3 <-
+#'           lm(
+#'               formula = ht ~ repl*seedlot
+#'             , data    = DataExam3.1
+#'             )
+#'
 #'
 #' fmtab3.3ANOVA1 <-
 #'   anova(fmtab3.3) %>%
 #'   mutate(
-#'   "F value" = c(anova(fmtab3.3)[1:2, 3]/anova(fmtab3.3)[3, 3]
-#'                , anova(fmtab3.3)[4, 3]
-#'                , NA)
-#'                )
+#'   "F value" =
+#'          c(
+#'            anova(fmtab3.3)[1:2, 3]/anova(fmtab3.3)[3, 3]
+#'          , anova(fmtab3.3)[3, 4]
+#'          , NA
+#'          )
+#'           )
 #'
 #'  # Pg. 33 (Table 3.3)
 #' fmtab3.3ANOVA1 %>%
 #'   mutate(
-#'   "Pr(>F)"  = pf(q = fmtab3.3ANOVA1[ ,4]
-#'                , df1 = fmtab3.3ANOVA1[ ,1]
-#'                , df2 = fmtab3.3ANOVA1[4,1], lower.tail = FALSE)
-#'                )
+#'   "Pr(>F)"  =
+#'        c(
+#'          NA
+#'        , pf(
+#'             q   = fmtab3.3ANOVA1[2, 4]
+#'           , df1 = fmtab3.3ANOVA1[2, 1]
+#'           , df2 = fmtab3.3ANOVA1[3, 1], lower.tail = FALSE
+#'           )
+#'        , NA
+#'        , NA
+#'        )
+#'        )
 #'
 #'  # Pg. 33  (Table 3.3)
-#'  emmeans(object  = fmtab3.3, specs = ~ SeedLot)
+#'  emmeans(object  = fmtab3.3, specs = ~ seedlot)
 #'
 #'  # Pg. 34  (Figure 3.2)
-#'  ggplot(mapping = aes(x = fitted.values(fmtab3.3), y = residuals(fmtab3.3)))+
+#'  ggplot(
+#'     mapping = aes(
+#'                   x = fitted.values(fmtab3.3)
+#'                 , y = residuals(fmtab3.3)
+#'                 )
+#'                 ) +
 #'  geom_point(size = 2) +
 #'  labs(
 #'     x = "Fitted Values"
@@ -79,23 +100,40 @@
 #' DataExam3.1m[c(28, 51, 76), 6] <- NA
 #'
 #'
-#' fmtab3.4 <- lm(formula = Ht ~ Repl*SeedLot, data = DataExam3.1m)
+#' fmtab3.4 <-
+#'           lm(
+#'               formula   = ht ~ repl*seedlot
+#'             , data      = DataExam3.1m
+#'             )
 #'
 #' fmtab3.4ANOVA1 <-
 #'   anova(fmtab3.4) %>%
 #'   mutate(
-#'       "F value" = c(anova(fmtab3.4)[1:2, 3]/anova(fmtab3.4)[3, 3]
-#'                    , anova(fmtab3.4)[4, 3], NA))
+#'       "F value" =
+#'             c(
+#'                anova(fmtab3.4)[1:2, 3]/anova(fmtab3.4)[3, 3]
+#'              , anova(fmtab3.4)[3, 4]
+#'              , NA
+#'              )
+#'              )
 #'
 #' # Pg. 33 (Table 3.4)
 #' fmtab3.4ANOVA1 %>%
 #'   mutate(
-#'         "Pr(>F)"  = pf(q = fmtab3.4ANOVA1[ ,4]
-#'                      , df1 = fmtab3.4ANOVA1[ ,1]
-#'                      , df2 = fmtab3.4ANOVA1[4,1], lower.tail = FALSE)
-#'                      )
+#'   "Pr(>F)"  =
+#'        c(
+#'          NA
+#'        , pf(
+#'             q   = fmtab3.4ANOVA1[2, 4]
+#'           , df1 = fmtab3.4ANOVA1[2, 1]
+#'           , df2 = fmtab3.4ANOVA1[3, 1], lower.tail = FALSE
+#'           )
+#'        , NA
+#'        , NA
+#'        )
+#'        )
 #'
 #'  # Pg. 33  (Table 3.4)
-#'  emmeans(object  = fmtab3.4, specs = ~ SeedLot)
+#'  emmeans(object  = fmtab3.4, specs = ~ seedlot)
 #'
 NULL
